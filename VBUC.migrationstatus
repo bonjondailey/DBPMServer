@@ -1,0 +1,11 @@
+<MigrationStatus>
+  <Date>4/28/2015 6:55:46 PM</Date>
+  <VBUC_Version>6.3.60307.45 (RTM 6.3.60307.45)</VBUC_Version>
+  <TargetLanguage>VisualBasic</TargetLanguage>
+  <VSVersion>VisualStudio2013</VSVersion>
+  <UpgradeOptions>
+  </UpgradeOptions>
+  <Projects>
+    <Project Path="DBPM_Server.vbproj" VB6DesignLines="510" VB6CodeLines="36458" />
+  </Projects>
+</MigrationStatus>

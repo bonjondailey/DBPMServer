@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion />
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F09FC071-7621-4878-BB70-1C6CE2093A00}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>DBPM_Server_4_28_2015Support</AssemblyName>
+    <RootNamespace>DBPM_Server_4_28_2015Support</RootNamespace>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>True</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>True</DefineTrace>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\UpgradeSupport\UpgradeHelpers.Gui\UpgradeHelpers.Gui.csproj">
+      <Project>{F852374C-22BA-4CB6-AA34-DA1A589B9D8D}</Project>
+      <Name>UpgradeHelpers.Gui</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UpgradeSupport\UpgradeHelpers.Gui.ContainerHelper\UpgradeHelpers.Gui.ContainerHelper.csproj">
+      <Project>{A4C9E0B1-7C82-427A-80F1-B548B5A1B1E8}</Project>
+      <Name>UpgradeHelpers.Gui.ContainerHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UpgradeSupport\UpgradeHelpers.Gui.Graphics\UpgradeHelpers.Gui.Graphics.csproj">
+      <Project>{72E5FF68-A339-4924-85D9-31C32EC540F6}</Project>
+      <Name>UpgradeHelpers.Gui.Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UpgradeSupport\UpgradeHelpers.SupportHelper\UpgradeHelpers.SupportHelper.csproj">
+      <Project>{2104ADE2-996D-4769-B4EE-ADD2FAE011F8}</Project>
+      <Name>UpgradeHelpers.SupportHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UpgradeSupport\UpgradeHelpers.Utils.ReflectionHelper\UpgradeHelpers.Utils.ReflectionHelper.csproj">
+      <Project>{9AD53694-7256-4635-AEEA-92FF88652713}</Project>
+      <Name>UpgradeHelpers.Utils.ReflectionHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UpgradeSupport\UpgradeHelpers.Utils\UpgradeHelpers.Utils.csproj">
+      <Project>{1A91E8F9-BEFF-4B66-98DF-4BFEE15FA39F}</Project>
+      <Name>UpgradeHelpers.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UpgradeSupport\UpgradeHelpers.VB\UpgradeHelpers.VB.csproj">
+      <Project>{9BE0611B-C690-4268-AB56-81D679F07022}</Project>
+      <Name>UpgradeHelpers.VB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UpgradeSupport\UpgradeHelpers.NotUpgradeHelper\UpgradeHelpers.NotUpgradeHelper.csproj">
+      <Project>{4D15E9B3-ECF3-4267-99A4-83C25FFD8EC4}</Project>
+      <Name>UpgradeHelpers.NotUpgradeHelper</Name>
+    </ProjectReference>
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PInvoke\SafeMethods\advapi32.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PInvoke\SafeMethods\kernel32.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PInvoke\SafeMethods\user32.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PInvoke\UnsafeMethods\advapi32.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PInvoke\UnsafeMethods\kernel32.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PInvoke\UnsafeMethods\Structures.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PInvoke\UnsafeMethods\user32.vb">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="My Project\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="BeforeBuild" />
+  <Target Name="AfterBuild" />
+</Project>
