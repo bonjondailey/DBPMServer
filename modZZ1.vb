@@ -47,7 +47,7 @@ Module modZZ1
         ShowUserMessage(strSubName, "RefreshQB: Adding QB_Customer to Max", "RefreshQB: Adding QB_Customer to Max", True)
 
         str1QBCust_QB_CustomerSQL = "SELECT * FROM QB_Customer WHERE ListID not in (SELECT Firm FROM AMGR_Client_Tbl WHERE Firm <> '') AND JobDesc not in (SELECT Client_Id FROM AMGR_Client_Tbl WHERE Name_Type = 'C'  AND Contact_Number = 0  AND Record_Type = 1) AND IsActive = 1 AND CustomerTypeRefFullName <> 'Local'"
-
+        'ShowUserMessage(strSubName, "process " & str1QBCust_QB_CustomerSQL, False, True)
         'Stop
         Debug.WriteLine(str1QBCust_QB_CustomerSQL)
 

@@ -12,17 +12,16 @@ Module modConfig
 	Public Sub setConfiguration()
         mainServerName = siteConstants.GetDBServer
 
-		drummondQuickbookPath = "\\" & mainServerName & "\Accounting\DrummondQB\DrummondPrinting.QBW"
+        drummondQuickbookPath = "\\" & mainServerName & "\qbdata\DrummondPrinting.QBW"
 		drummondQuickbookUser = "DBPM_Server2"
-        drummondQuickbookPass = "DBPM_qb_2017"
-
-        QB_Remote_Connection_Application = "DBPM_Server_Remote_Access"
-        'drummondQuickbookPass = "ServeyUs127" 'on devserver
+        drummondQuickbookPass = "DBPM_qb_2114Main"
+        'on devserver  drummondQuickbookPass = "ServeyUs127" 
 
         sqlMaxUser = "MASTER"
 		sqlMaxPass = "CONTROL"
 
         gstrSQLConnectionString = siteConstants.SQLConnectionString
 
+        'siteConstants.ShowUserMessage("setConfiguration", "MainServerName: " & mainServerName & "---------------------" & "SQL CONNECT: " & gstrSQLConnectionString)
 	End Sub
 End Module

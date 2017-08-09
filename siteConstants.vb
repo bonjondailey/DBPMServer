@@ -30,6 +30,8 @@ Public Class siteConstants
         Select Case Environment.MachineName
             Case "SERVER06"
                 Return "SERVER06"
+            Case "DLDBPM"
+                Return "DLDBPM\MSSQLSERVER2012"
             Case Else
                 Return "DEVSERVER"
         End Select
@@ -37,7 +39,7 @@ Public Class siteConstants
 
     Public Shared Function GetErrorSendToEmail() As String
         Select Case Environment.MachineName
-            Case "SERVER06"
+            Case "SERVER06", "DLDBPM"
                 Return "abarnes@drum-line.com"
             Case Else
                 Return "jdbailey@gmail.com"

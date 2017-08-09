@@ -342,7 +342,7 @@ Partial Friend Class frmMain
             'Update the teather clock
             Dim strSQL As String = ""
             If Not booQBRefreshInProgress Then
-                strSQL = "UPDATE DBPM_Status SET StatusDate = getdate(), StatusUser = 'PROGRAM', StatusComputer = 'Server06' WHERE Condition = 'DBPM Server' AND Status = 'Last Run'"
+                strSQL = "UPDATE DBPM_Status SET StatusDate = getdate(), StatusUser = 'PROGRAM', StatusComputer = '" & Environment.MachineName & "' WHERE Condition = 'DBPM Server' AND Status = 'Last Run'"
                 SQLHelper.ExecuteSQL(cnDBPM, strSQL)
             End If
 

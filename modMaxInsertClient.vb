@@ -125,7 +125,7 @@ Module modMaxInsertClient
                                 "   , Zip_Code " & Environment.NewLine & _
                                 "   -- , Change_Bits " & Environment.NewLine & _
                                 "   , Last_Client_Id " & Environment.NewLine & _
-                                "   , Record_Id " & Environment.NewLine & _
+                                "   -- , Record_Id " & Environment.NewLine & _
                                 "   , Creator_Id " & Environment.NewLine & _
                                 "   , Create_Date " & Environment.NewLine & _
                                 "   , Contact_Inherits_UDFs " & Environment.NewLine & _
@@ -187,7 +187,7 @@ Module modMaxInsertClient
                                 "   , '" & strMaxC__Zip_Code & "'  --Zip_Code" & Environment.NewLine & _
                                 "   -- , '" & strMaxC__Change_Bits & "'  --Change_Bits" & Environment.NewLine & _
                                 "   , '" & strMaxC__Last_Client_Id & "'  --Last_Client_Id" & Environment.NewLine & _
-                                "   , '" & strMaxC__Record_Id & "'  --Record_Id" & Environment.NewLine & _
+                                "   -- , '" & strMaxC__Record_Id & "'  --Record_Id" & Environment.NewLine & _
                                 "   , '" & strMaxC__Creator_Id & "'  --Creator_Id" & Environment.NewLine & _
                                 "   , '" & strMaxC__Create_Date & "'  --Create_Date" & Environment.NewLine & _
                                 "   , '" & strMaxC__Contact_Inherits_UDFs & "'  --Contact_Inherits_UDFs" & Environment.NewLine & _
