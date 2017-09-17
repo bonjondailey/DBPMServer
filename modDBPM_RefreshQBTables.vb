@@ -56,7 +56,7 @@ Module modDBPM_RefreshQBTables
         RefreshQB_Invoice() ''FIRST CODE_UPDATE COMPLETE
         RefreshQB_InvoiceLine() ''FIRST CODE_UPDATE COMPLETE
         RefreshQB_Customer() 'FIRST CODE_UPDATE COMPLETE
-        InsertQBCustIntoMax()
+        'InsertQBCustIntoMax()
 
 
         If gCustomerBalanceUpdateList.Count > 0 Then
