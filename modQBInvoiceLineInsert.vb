@@ -402,9 +402,7 @@ Module modQBInsertInvoiceLine
             End If
 
             strSQL = "INSERT INTO InvoiceLogItem (JobNumber, ErrorMsg) VALUES ('" & strQBIL_RefNumber & "', '" & myErrorMsg & "')"
-            Using objSQL As New SQLHelper()
-                objSQL.ExecuteSQL(strSQL)
-            End Using
+            reportInvoiceLineError(strSQL)
 
             HaveError("modQBInsertInvoiceLine", "InsertIntoQBInvoiceLineJobs", CStr(Information.Err().Number), excep.Message, Information.Err().Source, "", "")
             retVal = False
@@ -413,5 +411,17 @@ Module modQBInsertInvoiceLine
 
         Return retVal
     End Function
+
+    Public Sub reportInvoiceLineError(sql As String)
+       
+        Try
+            Using objSQL As New SQLHelper()
+                objSQL.ExecuteSQL(sql)
+            End Using
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
 End Module

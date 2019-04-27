@@ -268,24 +268,33 @@ Public Class siteConstants
         If Results.Length > TrimSettings.MaxLength Then
             'Determine if the string should be truncated or wrapped
             If TrimSettings.ForceBreak Then
+        
                 'Wrap the string
                 Dim sb As New System.Text.StringBuilder
                 Dim StartPos As Integer = 0
                 Dim LineLength As Integer = 0
 
                 While StartPos < Results.Length
+        
                     LineLength = NCInt(IIf(StartPos + TrimSettings.MaxLength > Results.Length, Results.Length - StartPos, TrimSettings.MaxLength))
-
+        
                     sb.Append(Results.Substring(StartPos, LineLength) & TrimSettings.BreakCharacter)
-
+        
                     StartPos += LineLength
                 End While
 
                 Results = NCStr(sb.ToString())
+        
             Else
                 'Truncate the string
+        
                 Results = Results.Substring(0, TrimSettings.MaxLength - NCInt(IIf(TrimSettings.ShowElipsis, TrimSettings.Elipsis.Length, 0)))
-                Results = Results.Remove(Results.LastIndexOf(" "))
+        
+                Try
+                    Results = Results.Remove(Results.LastIndexOf(" "))
+                Catch ex As Exception
+
+                End Try
 
                 If TrimSettings.ShowElipsis Then
                     Results &= TrimSettings.Elipsis

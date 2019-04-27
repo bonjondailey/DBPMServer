@@ -524,7 +524,7 @@ Module modPutJobInvoicesIn
                                         End If
                                     End Using
 
-
+                                    ShowUserMessage(strSubName, "ShipMethod_AfterDBCheck")
                                     'GET THE TxnDate (One work day after ShipDate. Account for Fri to Mon etc.)
                                     strDay = DateTime.Now.ToString("ddd")
                                     strHour = DateTime.Now.ToString("HHmm")
@@ -555,6 +555,7 @@ Module modPutJobInvoicesIn
 
                                     ''Here are the InvoiceLine vars to fill
                                     ''Fill var strings
+                                    ShowUserMessage(strSubName, "ShipAddressInfo_1")
 
                                     strQBIL_CustomerRefListID = strJobs_BillToCompanyKeyQBListID 'From Customer x2
                                     'strQBIL_CustomerRefFullName = str3QBCust_FullName                       'From Customer x2
@@ -590,6 +591,9 @@ Module modPutJobInvoicesIn
 
                                     strQBIL_FOB = ""
 
+                                    ShowUserMessage(strSubName, "ShipAddressInfo_2")
+
+
                                     If strShipInfo_StepCompletedDate <> "" Then
                                         Dim TempDate2 As Date
                                         strQBIL_ShipDate = IIf(DateTime.TryParse(strShipInfo_StepCompletedDate, TempDate2), TempDate2.ToString("yyyy-MM-dd"), strShipInfo_StepCompletedDate) 'InvText? ShipDate  -else GL PostDate
@@ -597,6 +601,7 @@ Module modPutJobInvoicesIn
                                         Dim TempDate3 As Date
                                         strQBIL_ShipDate = IIf(DateTime.TryParse(strJobs_DateShipped, TempDate3), TempDate3.ToString("yyyy-MM-dd"), strJobs_DateShipped)
                                     End If
+                                    ShowUserMessage(strSubName, "ShipAddressInfo_3")
 
 
                                     'new:  ShipMethod
@@ -617,6 +622,8 @@ Module modPutJobInvoicesIn
                                     strQBIL_InvoiceLineType = "ILType" '"Other?"                         'AVAILABLE? Custom?
                                     strQBIL_InvoiceLineTxnLineID = "ILTxnLineID" 'AVAILABLE 36  'From GL RecCount or InvText LineNum ?
 
+                                    ShowUserMessage(strSubName, "ShipAddressInfo_4")
+
                                     If strShipInfo_ShipQtyShipped <> "" Then
                                         strQBIL_InvoiceLineQuantity = strShipInfo_ShipQtyShipped '"1"                       '1 or from InvText Qty
                                     Else
@@ -635,12 +642,20 @@ Module modPutJobInvoicesIn
                                     'strQBIL_InvoiceLineOverrideItemAccountRefListID = gstrIOC_SalesOrPurchaseAccountRefListID      'forced to GL via QB_OtherItem x2
                                     'strQBIL_InvoiceLineOverrideItemAccountRefFullName = gstrIOC_SalesOrPurchaseAccountRefFullName  'forced to GL via QB_OtherItem x2
 
-                                    Dim trimSetting As New siteConstants.AdvancedTrimSettings(29, True, "...")
+                                    Dim trimSetting As New siteConstants.AdvancedTrimSettings()
+                                    trimSetting.MaxLength = 25
+                                    trimSetting.ShowElipsis = True
+                                    trimSetting.Elipsis = "..."
+                                    trimSetting.ForceBreak = False
 
+                                    ShowUserMessage(strSubName, "ShipAddressInfo_4:TrimSettings_1")
                                     strQBIL_CustomFieldInvoiceLineOther1 = NCStr(strJobs_Imprint, trimSetting) 'IMPRINT
+                                    ShowUserMessage(strSubName, "ShipAddressInfo_4:TrimSettings_2")
                                     strQBIL_CustomFieldInvoiceLineOther2 = strSpecial 'SPECIAL
-
+                                    ShowUserMessage(strSubName, "ShipAddressInfo_4:AfterTrimSettings")
                                     strQBIL_FQSaveToCache = "1"
+
+                                    ShowUserMessage(strSubName, "ShipAddressInfo_5")
 
 
                                     '*******************************************************
@@ -649,7 +664,10 @@ Module modPutJobInvoicesIn
                                     '*******************************************************
                                     '*******************************************************
                                     Try
+                                        ShowUserMessage(strSubName, "InsertIntoQBInvoiceLineJobs:Before")
                                         If Not InsertIntoQBInvoiceLineJobs() Then Continue While
+                                        ShowUserMessage(strSubName, "InsertIntoQBInvoiceLineJobs:After")
+
                                     Catch ex As Exception
                                         HaveError(strObjName, strSubName & ":659", CStr(Information.Err().Number), ex.Message, Information.Err().Source, "", "")
                                         Continue While
@@ -664,10 +682,11 @@ Module modPutJobInvoicesIn
 
                             End Using
 
-
                             'Do other invoice lines (add-ons)
                             strPricingInfo_vwT_JobPricingSQL = "SELECT * FROM vw_JobPricing2 WHERE SalesOrderN = '" & strJobs_SalesOrderN & "' AND KeyNName <> 'SalesOrderN' ORDER BY OrderBy, ComponantNum, StepNum, StepN, OrderBy2, Definition  "
                             Debug.WriteLine(strPricingInfo_vwT_JobPricingSQL)
+
+                            ShowUserMessage(strSubName, "Job_Pricing_Start")
 
                             Using rsPricingInfo_vwT_JobPricing As SqlDataReader = SQLHelper.ExecuteReader(cnDBPM, CommandType.Text, strPricingInfo_vwT_JobPricingSQL)
 
@@ -790,6 +809,7 @@ Module modPutJobInvoicesIn
                                         'strQBIL_InvoiceLineOverrideItemAccountRefListID = gstrIOC_SalesOrPurchaseAccountRefListID      'forced to GL via QB_OtherItem x2
                                         'strQBIL_InvoiceLineOverrideItemAccountRefFullName = gstrIOC_SalesOrPurchaseAccountRefFullName  'forced to GL via QB_OtherItem x2
 
+                                        ShowUserMessage(strSubName, "Shipping_Set InvoiceLineOther1:Before")
                                         strQBIL_CustomFieldInvoiceLineOther1 = "" 'strJobs_Imprint      'IMPRINT
                                         If strTrackingNumber <> "" Then
                                             If strShipToCarrier.Contains("fed") Then
@@ -802,6 +822,7 @@ Module modPutJobInvoicesIn
                                                 strQBIL_CustomFieldInvoiceLineOther1 = "Track: " & strTrackingNumber
                                             End If
                                         End If
+                                        ShowUserMessage(strSubName, "Shipping_Set InvoiceLineOther1:After")
                                         strQBIL_CustomFieldInvoiceLineOther2 = strSpecial 'SPECIAL
 
                                         strQBIL_FQSaveToCache = "1"
@@ -873,14 +894,22 @@ Module modPutJobInvoicesIn
                             'Do the (final) insert (blank)
                             'insert into invoice
                             strQBIL_FQSaveToCache = "0"
+                            ShowUserMessage(strSubName, "Invoice Line Comment Insert_Before")
                             InsertIntoQBInvoiceLineComment()
+                            ShowUserMessage(strSubName, "Invoice Line Comment Insert_After")
 
                             'Mark it loaded
                             strSQLLoaded = "UPDATE JOB_Header SET IsInvoiced = 1 WHERE SalesOrderN = '" & strJobs_SalesOrderN & "'"
+
+                            ShowUserMessage(strSubName, "Update Job Header_Before")
                             SQLHelper.ExecuteSQL(cnDBPM, strSQLLoaded)
+                            ShowUserMessage(strSubName, "Update Job Header_After")
 
                             strSQLLoaded = "UPDATE InvoiceLog SET DateInvoiced = '" & Now.ToString & "', ErrorCount = (SELECT Count(*) FROM InvoiceLogItem WHERE JobNumber = '" & strJobs_JobNum & "') WHERE JobNumber = '" & strJobs_JobNum & "'"
+
+                            ShowUserMessage(strSubName, "Update InvoiceLog_Before")
                             SQLHelper.ExecuteSQL(cnDBPM, strSQLLoaded)
+                            ShowUserMessage(strSubName, "Update InvoiceLog_After")
 
                         Catch ex As Exception
                             HaveError(strObjName, strSubName & ":891", CStr(Information.Err().Number), ex.Message, Information.Err().Source, "", "", ex)
